@@ -6,34 +6,108 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <div class="max-w-3xl mx-auto p-5">
-    <h1 class="text-3xl font-bold text-center mb-5">✨ Guía Interactiva de Cristales 💎</h1>
+  <div class="max-w-4xl mx-auto p-5">
+    <h1 class="text-3xl font-bold text-center mb-8">✨ Guía Interactiva de Cristales 💎</h1>
+
+    <!-- Filtros -->
+    <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <select id="filtro-chakra" class="p-2 border rounded">
+        <option value="">🔮 Filtrar por Chakra</option>
+        <option value="Raíz">Raíz</option>
+        <option value="Plexo Solar">Plexo Solar</option>
+        <option value="Corazón">Corazón</option>
+        <option value="Tercer Ojo">Tercer Ojo</option>
+        <option value="Corona">Corona</option>
+      </select>
+
+      <select id="filtro-signo" class="p-2 border rounded">
+        <option value="">🌟 Filtrar por Signo</option>
+        <option value="Aries">Aries</option>
+        <option value="Tauro">Tauro</option>
+        <option value="Géminis">Géminis</option>
+        <option value="Cáncer">Cáncer</option>
+        <option value="Leo">Leo</option>
+        <option value="Virgo">Virgo</option>
+        <option value="Libra">Libra</option>
+        <option value="Escorpio">Escorpio</option>
+        <option value="Sagitario">Sagitario</option>
+        <option value="Capricornio">Capricornio</option>
+        <option value="Acuario">Acuario</option>
+        <option value="Piscis">Piscis</option>
+      </select>
+
+      <select id="filtro-propiedad" class="p-2 border rounded">
+        <option value="">💫 Filtrar por Propiedad</option>
+        <option value="Amor propio">Amor propio</option>
+        <option value="Protección">Protección</option>
+        <option value="Sanación emocional">Sanación emocional</option>
+        <option value="Claridad mental">Claridad mental</option>
+        <option value="Abundancia">Abundancia</option>
+        <option value="Intuición">Intuición</option>
+      </select>
+    </div>
+
+    <!-- Contenedor de cristales -->
     <div id="contenedor-cristales" class="space-y-4"></div>
   </div>
 
   <script>
-fetch('./cristales.json')
-  .then(response => response.json())
-  .then(cristales => {
-    const contenedor = document.getElementById('contenedor-cristales');
+    let todosLosCristales = [];
 
-    cristales.forEach(cristal => {
-      const cristalDiv = document.createElement('div');
-      cristalDiv.className = 'p-4 bg-white shadow-md rounded-lg';
+    function mostrarCristales(filtrados) {
+      const contenedor = document.getElementById('contenedor-cristales');
+      contenedor.innerHTML = '';
 
-      cristalDiv.innerHTML = `
-        <h2 class="text-xl font-semibold text-indigo-700">${cristal.nombre}</h2>
-        <p><strong>Color:</strong> ${cristal.color}</p>
-        <p><strong>Chakra asociado:</strong> ${cristal.chakra.join(', ')}</p>
-        <p><strong>Propiedades:</strong> ${cristal.propiedades.join(', ')}</p>
-        <p><strong>Signos afines:</strong> ${cristal.signos_afines.join(', ')}</p>
-        <p class="italic mt-2">💫 ${cristal.recomendacion_diaria}</p>
-      `;
+      if (filtrados.length === 0) {
+        contenedor.innerHTML = '<p class="text-center text-gray-500">No se encontraron cristales con esos criterios.</p>';
+        return;
+      }
 
-      contenedor.appendChild(cristalDiv);
-    });
-  })
-  .catch(error => console.log('Error al cargar los cristales:', error));
-</script>
+      filtrados.forEach(cristal => {
+        const cristalDiv = document.createElement('div');
+        cristalDiv.className = 'p-4 bg-white shadow-md rounded-lg';
+
+        cristalDiv.innerHTML = `
+          <h2 class="text-xl font-semibold text-indigo-700">${cristal.nombre}</h2>
+          <p><strong>Color:</strong> ${cristal.color}</p>
+          <p><strong>Chakra asociado:</strong> ${cristal.chakra.join(', ')}</p>
+          <p><strong>Propiedades:</strong> ${cristal.propiedades.join(', ')}</p>
+          <p><strong>Signos afines:</strong> ${cristal.signos_afines.join(', ')}</p>
+          <p class="italic mt-2">💫 ${cristal.recomendacion_diaria}</p>
+        `;
+
+        contenedor.appendChild(cristalDiv);
+      });
+    }
+
+    function aplicarFiltros() {
+      const chakra = document.getElementById('filtro-chakra').value;
+      const signo = document.getElementById('filtro-signo').value;
+      const propiedad = document.getElementById('filtro-propiedad').value;
+
+      const filtrados = todosLosCristales.filter(cristal => {
+        const coincideChakra = chakra === "" || cristal.chakra.includes(chakra);
+        const coincideSigno = signo === "" || cristal.signos_afines.includes(signo);
+        const coincidePropiedad = propiedad === "" || cristal.propiedades.includes(propiedad);
+
+        return coincideChakra && coincideSigno && coincidePropiedad;
+      });
+
+      mostrarCristales(filtrados);
+    }
+
+    // Fetch del JSON
+    fetch('./cristales.json')
+      .then(response => response.json())
+      .then(data => {
+        todosLosCristales = data;
+        mostrarCristales(todosLosCristales);
+      });
+
+    // Eventos de filtros
+    document.getElementById('filtro-chakra').addEventListener('change', aplicarFiltros);
+    document.getElementById('filtro-signo').addEventListener('change', aplicarFiltros);
+    document.getElementById('filtro-propiedad').addEventListener('change', aplicarFiltros);
+  </script>
 </body>
 </html>
