@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "Amatista",
+    "color": "Violeta",
+    "chakra": ["Corona", "Tercer Ojo"],
+    "propiedades": ["Calma", "Claridad mental", "Protección energética", "Intuición"],
+    "signos_afines": ["Piscis", "Acuario"],
+    "recomendacion_diaria": "Llevá una amatista con vos para mantener tu mente despejada y tranquila durante el día."
+  },
+  {
+    "id": 2,
+    "nombre": "Cuarzo Rosa",
+    "color": "Rosa suave",
+    "chakra": ["Corazón"],
+    "propiedades": ["Amor propio", "Sanación emocional", "Empatía", "Relaciones saludables"],
+    "signos_afines": ["Tauro", "Libra"],
+    "recomendacion_diaria": "Colocá un cuarzo rosa cerca del corazón para atraer energía amorosa y equilibrada a tu día."
+  },
+  {
+    "id": 3,
+    "nombre": "Turmalina Negra",
+    "color": "Negro",
+    "chakra": ["Raíz"],
+    "propiedades": ["Protección", "Absorción de energías negativas", "Equilibrio emocional"],
+    "signos_afines": ["Capricornio", "Escorpio"],
+    "recomendacion_diaria": "Usá turmalina negra para protegerte y limpiar tu campo energético, especialmente en ambientes cargados."
+  },
+  {
+    "id": 4,
+    "nombre": "Citrino",
+    "color": "Amarillo-dorado",
+    "chakra": ["Plexo Solar"],
+    "propiedades": ["Abundancia", "Alegría", "Creatividad", "Optimismo"],
+    "signos_afines": ["Leo", "Géminis"],
+    "recomendacion_diaria": "Tené un citrino cerca para mantener alta tu energía creativa y atraer prosperidad."
+  }
+]
