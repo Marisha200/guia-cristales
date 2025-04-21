@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guía Interactiva de Cristales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-3xl mx-auto p-5">
+    <h1 class="text-3xl font-bold text-center mb-5">✨ Guía Interactiva de Cristales 💎</h1>
+    <div id="contenedor-cristales" class="space-y-4"></div>
+  </div>
+
+  <script>
+    fetch('https://TU-USUARIO.github.io/guia-cristales/cristales.json')
+      .then(response => response.json())
+      .then(cristales => {
+        const contenedor = document.getElementById('contenedor-cristales');
+
+        cristales.forEach(cristal => {
+          const cristalDiv = document.createElement('div');
+          cristalDiv.className = 'p-4 bg-white shadow-md rounded-lg';
+
+          cristalDiv.innerHTML = `
+            <h2 class="text-xl font-semibold text-indigo-700">${cristal.nombre}</h2>
+            <p><strong>Color:</strong> ${cristal.color}</p>
+            <p><strong>Chakra asociado:</strong> ${cristal.chakra.join(', ')}</p>
+            <p><strong>Propiedades:</strong> ${cristal.propiedades.join(', ')}</p>
+            <p><strong>Signos afines:</strong> ${cristal.signos_afines.join(', ')}</p>
+            <p class="italic mt-2">💫 ${cristal.recomendacion_diaria}</p>
+          `;
+
+          contenedor.appendChild(cristalDiv);
+        });
+      })
+      .catch(error => console.log('Error al cargar los cristales:', error));
+  </script>
+</body>
+</html>
