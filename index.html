@@ -12,28 +12,28 @@
   </div>
 
   <script>
-    fetch('https://github.com/Marisha200/guia-cristales/cristales.json')
-      .then(response => response.json())
-      .then(cristales => {
-        const contenedor = document.getElementById('contenedor-cristales');
+fetch('./cristales.json')
+  .then(response => response.json())
+  .then(cristales => {
+    const contenedor = document.getElementById('contenedor-cristales');
 
-        cristales.forEach(cristal => {
-          const cristalDiv = document.createElement('div');
-          cristalDiv.className = 'p-4 bg-white shadow-md rounded-lg';
+    cristales.forEach(cristal => {
+      const cristalDiv = document.createElement('div');
+      cristalDiv.className = 'p-4 bg-white shadow-md rounded-lg';
 
-          cristalDiv.innerHTML = `
-            <h2 class="text-xl font-semibold text-indigo-700">${cristal.nombre}</h2>
-            <p><strong>Color:</strong> ${cristal.color}</p>
-            <p><strong>Chakra asociado:</strong> ${cristal.chakra.join(', ')}</p>
-            <p><strong>Propiedades:</strong> ${cristal.propiedades.join(', ')}</p>
-            <p><strong>Signos afines:</strong> ${cristal.signos_afines.join(', ')}</p>
-            <p class="italic mt-2">💫 ${cristal.recomendacion_diaria}</p>
-          `;
+      cristalDiv.innerHTML = `
+        <h2 class="text-xl font-semibold text-indigo-700">${cristal.nombre}</h2>
+        <p><strong>Color:</strong> ${cristal.color}</p>
+        <p><strong>Chakra asociado:</strong> ${cristal.chakra.join(', ')}</p>
+        <p><strong>Propiedades:</strong> ${cristal.propiedades.join(', ')}</p>
+        <p><strong>Signos afines:</strong> ${cristal.signos_afines.join(', ')}</p>
+        <p class="italic mt-2">💫 ${cristal.recomendacion_diaria}</p>
+      `;
 
-          contenedor.appendChild(cristalDiv);
-        });
-      })
-      .catch(error => console.log('Error al cargar los cristales:', error));
-  </script>
+      contenedor.appendChild(cristalDiv);
+    });
+  })
+  .catch(error => console.log('Error al cargar los cristales:', error));
+</script>
 </body>
 </html>
